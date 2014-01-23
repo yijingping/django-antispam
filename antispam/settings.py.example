@@ -1,0 +1,12 @@
+# enable anti spam, default is True
+ANTI_SPAM = True
+if ANTI_SPAM:
+    # installed
+    INSTALLED_APPS += ( 'antispam',)
+    MIDDLEWARE_CLASSES += ( 'antispam.middleware.AntiSpamFilterMiddleware',)
+    # use redis backend cache, set cache key here 
+    ANTI_SPAM_CACHE_REDIS_KEY = 'redis'
+    # flush ip,ua from redis, every 10 minutes
+    ANTI_SPAM_DELTA_FLUSH_TIME = 60 * 10 
+    # invoke this view function when it's a spam 
+    ANTI_SPAM_SPAM_VIEW = 'common.views.page_dose_not_exist'
