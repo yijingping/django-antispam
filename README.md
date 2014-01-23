@@ -41,12 +41,14 @@ The black list won't work.
 Quick Start
 -----------
 
-1. Install
+* __Install__
+
     ```shell
     pip install git+https://github.com/yijingping/django-antispam#egg=django_antispam
     ```
 
-2. Add this lines in the end of  your setting
+* __Add this lines in the end of  your setting__
+
     ```python
     # enable anti spam, default is True
     ANTI_SPAM = True
@@ -62,16 +64,17 @@ Quick Start
         ANTI_SPAM_SPAM_VIEW = 'django.views.defaults.page_not_found'
     ```
 
-3. add white/black list list in your redis
+* __Add white/black list list in your redis__
+   
     ```shell 
     $ redis-cli -h 192.168.10.85 -p 6379
     > sadd sadd antispam:black_ua 'LG/U8120/v1.0'
     > sadd sadd antispam:black_ip '112.64.16.8' 
     ```
 
-4. Start your project, and check
+* __Start your project, and check__
 
-5. notice when change white/black list
+* __Notice when change white/black list__
     
    Antispam flush white/black list every ``ANTI_SPAM_DELTA_FLUSH_TIME`` seconds which is set in your settings.py.
 
