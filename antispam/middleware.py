@@ -30,7 +30,14 @@ def flush():
 
 
 def get_ip(request):
-    return request.META.get('REMOTE_ADDR','') 
+    if request.META.get('HTTP_CLIENT_IP'):
+        return request.META.get('HTTP_CLIENT_IP')
+    elif request.META.get('HTTP_X_FORWARDED_FOR'):
+        # maybe many proxy ips
+        ips = request.META.get('HTTP_X_FORWARDED_FOR')
+        return ips.split(',')[0].split()[0]
+    else:
+        return request.META.get('REMOTE_ADDR', '')
 
 def get_user_agent(request):
     return request.META.get('HTTP_USER_AGENT','') 
